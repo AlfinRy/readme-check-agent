@@ -131,6 +131,20 @@ describe("createGitHubClient", () => {
     );
   });
 
+  it("bounds large README and evidence file responses", async () => {
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockResolvedValueOnce(new Response("r".repeat(90_000)))
+      .mockResolvedValueOnce(new Response("f".repeat(40_000)));
+    const client = createGitHubClient({ fetchImpl });
+
+    const readme = await client.getReadme(repository);
+    const file = await client.getFileContent(repository, "package.json");
+
+    expect(readme).toHaveLength(80_001);
+    expect(file).toHaveLength(30_001);
+  });
+
   it("rejects private repositories returned through an optional token", async () => {
     const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
       Response.json({ ...repositoryPayload, private: true }),
@@ -194,6 +208,18 @@ describe("createGitHubClient", () => {
       .fn<typeof fetch>()
       .mockResolvedValue(new Response(null, { status: 503 }));
     const client = createGitHubClient({ fetchImpl });
+
+    await expectErrorCode(
+      client.getRepository(repository),
+      "GITHUB_UNAVAILABLE",
+    );
+  });
+
+  it("normalizes request timeouts", async () => {
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockRejectedValue(new DOMException("Timed out", "TimeoutError"));
+    const client = createGitHubClient({ fetchImpl, timeoutMs: 1 });
 
     await expectErrorCode(
       client.getRepository(repository),

@@ -7,6 +7,8 @@ import type { GitHubRepo } from "./repo-url";
 const GITHUB_API_BASE_URL = "https://api.github.com";
 const GITHUB_API_VERSION = "2026-03-10";
 const DEFAULT_TIMEOUT_MS = 10_000;
+const MAX_README_RESPONSE_CHARACTERS = 80_001;
+const MAX_FILE_RESPONSE_CHARACTERS = 30_001;
 
 const repositorySchema = z.object({
   name: z.string().min(1),
@@ -142,7 +144,7 @@ export function createGitHubClient(options: GitHubClientOptions = {}) {
       throw createResponseError(response, "readme");
     }
 
-    return readTextResponse(response);
+    return readTextResponse(response, MAX_README_RESPONSE_CHARACTERS);
   }
 
   async function getTree(
@@ -195,7 +197,7 @@ export function createGitHubClient(options: GitHubClientOptions = {}) {
       throw createResponseError(response, "content");
     }
 
-    return readTextResponse(response);
+    return readTextResponse(response, MAX_FILE_RESPONSE_CHARACTERS);
   }
 
   async function request(path: string, accept: string) {
@@ -278,11 +280,40 @@ function createRefQuery(ref?: string) {
   return `?${params.toString()}`;
 }
 
-async function readTextResponse(response: Response) {
+async function readTextResponse(response: Response, maxCharacters: number) {
+  if (!response.body) {
+    try {
+      return (await response.text()).slice(0, maxCharacters);
+    } catch (cause) {
+      throw invalidResponse(cause);
+    }
+  }
+
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let content = "";
+
   try {
-    return await response.text();
+    while (content.length < maxCharacters) {
+      const { done, value } = await reader.read();
+
+      if (done) {
+        content += decoder.decode();
+        break;
+      }
+
+      content += decoder.decode(value, { stream: true });
+    }
+
+    if (content.length >= maxCharacters) {
+      await reader.cancel();
+    }
+
+    return content.slice(0, maxCharacters);
   } catch (cause) {
     throw invalidResponse(cause);
+  } finally {
+    reader.releaseLock();
   }
 }
 

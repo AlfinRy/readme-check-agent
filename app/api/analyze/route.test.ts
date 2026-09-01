@@ -109,6 +109,22 @@ describe("POST /api/analyze", () => {
     );
   });
 
+  it("bounds oversized README content before model analysis", async () => {
+    mocks.getReadme.mockResolvedValue("r".repeat(80_001));
+
+    const response = await POST(
+      jsonRequest({ repoUrl: "https://github.com/owner/repo" }),
+    );
+
+    expect(response.status).toBe(200);
+    expect(mocks.auditRepository).toHaveBeenCalledWith(
+      expect.objectContaining({
+        readme: "r".repeat(80_000),
+        readmeTruncated: true,
+      }),
+    );
+  });
+
   it.each([
     [new GitHubClientError("REPOSITORY_NOT_FOUND", "Not found"), 404, "REPOSITORY_NOT_FOUND"],
     [new GitHubClientError("PRIVATE_REPOSITORY", "Private"), 422, "PRIVATE_REPOSITORY"],

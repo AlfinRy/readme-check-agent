@@ -229,9 +229,9 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 12 — Hardening dan regression test
 
-- [ ] Uji URL malformed, repo tidak ada/private, README tidak ada, rate limit, timeout, output model invalid, dan empty findings.
-- [ ] Jalankan seluruh test, lint, type-check, dan production build.
-- [ ] Perbaiki hanya bug blocker atau high-impact.
+- [x] Uji URL malformed, repo tidak ada/private, README tidak ada, rate limit, timeout, output model invalid, dan empty findings.
+- [x] Jalankan seluruh test, lint, type-check, dan production build.
+- [x] Perbaiki hanya bug blocker atau high-impact.
 
 **Acceptance check:** seluruh quality gate lulus dari working tree bersih.
 
@@ -335,5 +335,5 @@ git status --short
 | 2 Sep 2026 (H-4) | Evidence GitHub terambil dan dibatasi | Selesai |
 | 3 Sep 2026 (H-3) | Agent endpoint bekerja end-to-end | Sedang berjalan |
 | 4 Sep 2026 (H-2) | UI lengkap dan feature freeze | Selesai |
-| 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Belum dimulai |
+| 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Sedang berjalan |
 | 6 Sep 2026 (H) | Final check dan submission sebelum 14.00 WIB | Belum dimulai |
