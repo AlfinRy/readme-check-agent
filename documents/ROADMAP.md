@@ -189,9 +189,9 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 9 — Form analisis dan validasi client
 
-- [ ] Buat halaman utama dengan value proposition singkat dan satu primary action.
-- [ ] Tambahkan input URL, contoh URL, validasi inline, dan submit state.
-- [ ] Pastikan form dapat digunakan dengan keyboard dan memiliki label yang aksesibel.
+- [x] Buat halaman utama dengan value proposition singkat dan satu primary action.
+- [x] Tambahkan input URL, contoh URL, validasi inline, dan submit state.
+- [x] Pastikan form dapat digunakan dengan keyboard dan memiliki label yang aksesibel.
 
 **Acceptance check:** URL invalid tidak memanggil API; URL valid memulai analisis satu kali.
 
