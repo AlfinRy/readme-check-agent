@@ -1,8 +1,19 @@
 # Roadmap: ReadmeCheck Agent
 
-Roadmap ini menargetkan seluruh fitur, deployment, dan materi demo selesai paling lambat **H-1**. Hari H hanya digunakan untuk final smoke test dan submission, bukan pengembangan fitur baru.
+Roadmap ini menargetkan seluruh fitur, deployment, dan materi demo selesai paling lambat **Sabtu, 5 September 2026 pukul 20.00 WIB (H-1)**. Hari H hanya digunakan untuk final smoke test dan submission, bukan pengembangan fitur baru.
 
-> Jadwal memakai format relatif karena tanggal deadline belum dicantumkan. Setelah tanggal pasti diketahui, label H-5 sampai H dapat diganti dengan tanggal kalender.
+**Deadline resmi:** Minggu, 6 September 2026 pukul 14.00 WIB (UTC+7)
+
+**Target submit internal:** Minggu, 6 September 2026 pukul 11.00 WIB, menyisakan buffer tiga jam.
+
+| Fase | Tanggal | Fokus |
+|---|---|---|
+| H-5 | Selasa, 1 September 2026 | Fondasi dan AI Gateway |
+| H-4 | Rabu, 2 September 2026 | Data GitHub |
+| H-3 | Kamis, 3 September 2026 | Agent dan API |
+| H-2 | Jumat, 4 September 2026 | UI dan feature freeze |
+| H-1 | Sabtu, 5 September 2026 | Stabilization, deployment, dan demo |
+| H | Minggu, 6 September 2026 | Final check dan submission sebelum 14.00 WIB |
 
 ## Definition of Done MVP
 
@@ -47,7 +58,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ---
 
-## H-5 — Fondasi dan Koneksi AI Gateway
+## H-5 — Selasa, 1 September 2026 — Fondasi dan Koneksi AI Gateway
 
 **Target harian:** aplikasi dapat berjalan secara lokal dan server berhasil memanggil GLM-5.3 melalui AI Gateway.
 
@@ -86,7 +97,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ---
 
-## H-4 — Akuisisi dan Penyaringan Data GitHub
+## H-4 — Rabu, 2 September 2026 — Akuisisi dan Penyaringan Data GitHub
 
 **Target harian:** semua evidence yang dibutuhkan agent dapat diambil dan dibatasi secara deterministik.
 
@@ -127,7 +138,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ---
 
-## H-3 — Agent dan Endpoint Analisis End-to-End
+## H-3 — Kamis, 3 September 2026 — Agent dan Endpoint Analisis End-to-End
 
 **Target harian:** URL repository dapat diproses server menjadi findings terstruktur yang konservatif.
 
@@ -170,7 +181,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ---
 
-## H-2 — UI dan Integrasi Pengguna
+## H-2 — Jumat, 4 September 2026 — UI dan Integrasi Pengguna
 
 **Target harian:** alur paste URL sampai membaca hasil siap digunakan dan direkam.
 
@@ -210,7 +221,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ---
 
-## H-1 — Stabilization, Deployment, dan Materi Submission
+## H-1 — Sabtu, 5 September 2026 — Stabilization, Deployment, dan Materi Submission
 
 **Target harian:** release candidate online dan semua bahan submission siap. Hari H tidak memerlukan coding.
 
@@ -272,9 +283,9 @@ git push origin v0.1.0
 
 ---
 
-## Hari H — Final Check dan Submission
+## Hari H — Minggu, 6 September 2026 — Final Check dan Submission
 
-**Target harian:** submit lebih awal; jangan menambahkan fitur baru.
+**Target harian:** lakukan final check pada pagi hari dan submit paling lambat pukul **11.00 WIB**; jangan menambahkan fitur baru. Deadline resmi adalah pukul **14.00 WIB**.
 
 ### Quest 16 — Final smoke test dan submit
 
@@ -318,9 +329,9 @@ git status --short
 
 | Hari | Outcome | Status |
 |---|---|---|
-| H-5 | Fondasi Next.js + AI Gateway bekerja | Belum dimulai |
-| H-4 | Evidence GitHub terambil dan dibatasi | Belum dimulai |
-| H-3 | Agent endpoint bekerja end-to-end | Belum dimulai |
-| H-2 | UI lengkap dan feature freeze | Belum dimulai |
-| H-1 | Production + dokumentasi + demo siap | Belum dimulai |
-| H | Final check dan submission | Belum dimulai |
+| 1 Sep 2026 (H-5) | Fondasi Next.js + AI Gateway bekerja | Belum dimulai |
+| 2 Sep 2026 (H-4) | Evidence GitHub terambil dan dibatasi | Belum dimulai |
+| 3 Sep 2026 (H-3) | Agent endpoint bekerja end-to-end | Belum dimulai |
+| 4 Sep 2026 (H-2) | UI lengkap dan feature freeze | Belum dimulai |
+| 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Belum dimulai |
+| 6 Sep 2026 (H) | Final check dan submission sebelum 14.00 WIB | Belum dimulai |
