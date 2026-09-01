@@ -267,7 +267,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 - [x] Pilih repository demo yang hasilnya stabil dan siapkan fallback.
 - [ ] Rekam demo atau siapkan hosted demo final.
 - [x] Buat draft teks submission berisi repo link dan demo link.
-- [ ] Tag release candidate setelah final smoke test.
+- [x] Tag release candidate setelah final smoke test.
 
 **Acceptance check:** video/link dapat dibuka publik dan draft submission siap dikirim tanpa perubahan kode.
 
@@ -335,5 +335,5 @@ git status --short
 | 2 Sep 2026 (H-4) | Evidence GitHub terambil dan dibatasi | Selesai |
 | 3 Sep 2026 (H-3) | Agent endpoint bekerja end-to-end | Sedang berjalan |
 | 4 Sep 2026 (H-2) | UI lengkap dan feature freeze | Selesai |
-| 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Sedang berjalan |
+| 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Selesai |
 | 6 Sep 2026 (H) | Final check dan submission sebelum 14.00 WIB | Belum dimulai |
