@@ -168,10 +168,12 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 8 — Evaluasi kualitas pada repository nyata
 
-- [ ] Uji minimal tiga repository: satu terlihat sinkron, satu sengaja outdated, dan satu OSS populer.
-- [ ] Catat expected finding dan false positive dalam fixture/evaluation notes.
+- [x] Uji minimal tiga repository: satu terlihat sinkron, satu sengaja outdated, dan satu OSS populer.
+- [x] Catat expected finding dan false positive dalam fixture/evaluation notes.
 - [ ] A/B reasoning effort bila opsi model tersedia.
-- [ ] Tune prompt secara konservatif berdasarkan hasil evaluasi.
+- [x] Tune prompt secara konservatif berdasarkan hasil evaluasi.
+
+> A/B low versus medium belum selesai karena AI Gateway membatasi request beruntun pada model free tier. Evaluation suite sudah diberi jeda antarpanggilan dan harus dijalankan ulang setelah rate window pulih.
 
 **Acceptance check:** agent tidak mengarang evidence, dapat menghasilkan empty findings, dan mendeteksi sedikitnya satu kontradiksi yang sengaja dibuat.
 

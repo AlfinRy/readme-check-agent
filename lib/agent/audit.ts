@@ -25,6 +25,7 @@ type AuditRepositoryInput = {
   readme: string;
   readmeTruncated?: boolean;
   evidence: RepositoryEvidence;
+  reasoning?: "low" | "medium";
   abortSignal?: AbortSignal;
 };
 
@@ -33,6 +34,7 @@ export async function auditRepository({
   readme,
   readmeTruncated = false,
   evidence,
+  reasoning = "medium",
   abortSignal = AbortSignal.timeout(MODEL_TIMEOUT_MS),
 }: AuditRepositoryInput): Promise<AuditResponse> {
   const generationOptions = {
@@ -49,7 +51,7 @@ export async function auditRepository({
       name: "readme_audit",
       description: "Conservative README audit findings backed by repository evidence.",
     }),
-    reasoning: "medium" as const,
+    reasoning,
     providerOptions: {
       gateway: {
         models: [AUDIT_FALLBACK_MODEL_ID],
@@ -67,8 +69,17 @@ export async function auditRepository({
       audit = auditResponseSchema.parse(result.output);
       break;
     } catch (error) {
-      if (attempt === 0 && NoObjectGeneratedError.isInstance(error)) {
-        continue;
+      if (NoObjectGeneratedError.isInstance(error)) {
+        const repaired = error.text ? repairAuditOutput(error.text) : null;
+
+        if (repaired) {
+          audit = repaired;
+          break;
+        }
+
+        if (attempt === 0) {
+          continue;
+        }
       }
 
       throw error;
@@ -84,4 +95,45 @@ export async function auditRepository({
   }
 
   return audit;
+}
+
+export function repairAuditOutput(text: string): AuditResponse | null {
+  const jsonText = text
+    .trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/, "");
+  let value: unknown;
+
+  try {
+    value = JSON.parse(jsonText);
+  } catch {
+    return null;
+  }
+
+  if (!isRecord(value) || !Array.isArray(value.findings)) {
+    return null;
+  }
+
+  const normalized = {
+    findings: value.findings.map((finding) => {
+      if (!isRecord(finding)) {
+        return finding;
+      }
+
+      return {
+        section: finding.section,
+        issue: finding.issue ?? finding.contradiction,
+        evidence: finding.evidence,
+        confidence: finding.confidence,
+      };
+    }),
+    message: value.message,
+  };
+  const parsed = auditResponseSchema.safeParse(normalized);
+
+  return parsed.success ? parsed.data : null;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
 }

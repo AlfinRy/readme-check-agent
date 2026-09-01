@@ -14,7 +14,7 @@ import {
 } from "@/lib/ai/gateway";
 import type { RepositoryEvidence } from "@/lib/github/evidence";
 
-import { auditRepository } from "./audit";
+import { auditRepository, repairAuditOutput } from "./audit";
 
 const evidence: RepositoryEvidence = {
   treeSha: "tree-sha",
@@ -92,6 +92,39 @@ describe("auditRepository", () => {
       findings: [],
       message: "No outdated sections detected.",
     });
+  });
+
+  it("repairs fenced JSON with a known alternative issue field", () => {
+    expect(
+      repairAuditOutput(`\`\`\`json
+{
+  "findings": [
+    {
+      "section": "Requirements",
+      "claim": "Node.js 16 is required.",
+      "contradiction": "The manifest requires Node.js 20 or newer.",
+      "evidence": "package.json engines.node is >=20.",
+      "confidence": "high"
+    }
+  ],
+  "message": "1 outdated section detected."
+}
+\`\`\``),
+    ).toEqual({
+      findings: [
+        {
+          section: "Requirements",
+          issue: "The manifest requires Node.js 20 or newer.",
+          evidence: "package.json engines.node is >=20.",
+          confidence: "high",
+        },
+      ],
+      message: "1 outdated section detected.",
+    });
+  });
+
+  it("does not repair arbitrary invalid text", () => {
+    expect(repairAuditOutput("not JSON")).toBeNull();
   });
 
   it("rejects an invalid model response", async () => {

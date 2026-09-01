@@ -20,7 +20,9 @@ Audit rules:
 - Return no more than 20 distinct findings.
 
 Response rules:
-- Return data matching the provided schema.
+- Return raw JSON matching the provided schema, without Markdown fences or commentary.
+- Each finding must contain exactly these fields: section, issue, evidence, confidence.
+- Do not use alternative fields such as claim, contradiction, reason, or explanation.
 - If findings is empty, set message to "No outdated sections detected."
 - If findings is not empty, use a short factual message describing the number of findings.`;
 
