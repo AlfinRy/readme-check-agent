@@ -156,11 +156,11 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 7 — Implementasi `/api/analyze`
 
-- [ ] Validasi request di server.
-- [ ] Orkestrasi parser URL, GitHub client, evidence collector, dan AI Gateway.
-- [ ] Gunakan structured output dengan reasoning effort medium jika didukung konfigurasi provider.
-- [ ] Kembalikan status HTTP dan response error yang konsisten.
-- [ ] Tambahkan pembatas ukuran input dan timeout yang masuk akal untuk Vercel.
+- [x] Validasi request di server.
+- [x] Orkestrasi parser URL, GitHub client, evidence collector, dan AI Gateway.
+- [x] Gunakan structured output dengan reasoning effort medium jika didukung konfigurasi provider.
+- [x] Kembalikan status HTTP dan response error yang konsisten.
+- [x] Tambahkan pembatas ukuran input dan timeout yang masuk akal untuk Vercel.
 
 **Acceptance check:** request valid menghasilkan findings terstruktur atau empty result; failure tidak membocorkan secret/internal stack.
 
@@ -329,9 +329,9 @@ git status --short
 
 | Hari | Outcome | Status |
 |---|---|---|
-| 1 Sep 2026 (H-5) | Fondasi Next.js + AI Gateway bekerja | Belum dimulai |
-| 2 Sep 2026 (H-4) | Evidence GitHub terambil dan dibatasi | Belum dimulai |
-| 3 Sep 2026 (H-3) | Agent endpoint bekerja end-to-end | Belum dimulai |
+| 1 Sep 2026 (H-5) | Fondasi Next.js + AI Gateway bekerja | Selesai |
+| 2 Sep 2026 (H-4) | Evidence GitHub terambil dan dibatasi | Selesai |
+| 3 Sep 2026 (H-3) | Agent endpoint bekerja end-to-end | Sedang berjalan |
 | 4 Sep 2026 (H-2) | UI lengkap dan feature freeze | Belum dimulai |
 | 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Belum dimulai |
 | 6 Sep 2026 (H) | Final check dan submission sebelum 14.00 WIB | Belum dimulai |

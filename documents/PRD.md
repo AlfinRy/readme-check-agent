@@ -148,7 +148,7 @@ Starting system prompt direction:
 
 This conservatism instruction matters for demo quality: a tool that hallucinates fake issues on a clean repo looks worse than one that correctly says "looks fine."
 
-Reasoning support for MiniMax M3 Free must be verified through AI Gateway during Day 3 testing. If supported, start with **medium** reasoning effort; otherwise rely on the conservative prompt and bounded evidence rather than provider-specific options.
+MiniMax M3 Free accepted the AI SDK 7 **medium** reasoning setting during the end-to-end endpoint smoke test. Keep medium as the initial setting and compare it with a lower effort during evaluation; the conservative prompt and bounded evidence remain the primary safeguards.
 
 ---
 

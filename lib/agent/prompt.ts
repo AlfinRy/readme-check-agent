@@ -30,17 +30,20 @@ type AuditPromptInput = {
     defaultBranch: string;
   };
   readme: string;
+  readmeTruncated?: boolean;
   evidence: RepositoryEvidence;
 };
 
 export function buildAuditPrompt({
   repository,
   readme,
+  readmeTruncated = false,
   evidence,
 }: AuditPromptInput) {
   const snapshot = {
     repository,
     contextNotes: {
+      readmeContentIsPartial: readmeTruncated,
       treeListingIsPartial: evidence.truncated,
       manifestContentIsPartial: evidence.manifest?.truncated ?? false,
       changelogContentIsPartial: evidence.changelog?.truncated ?? false,
