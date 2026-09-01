@@ -73,10 +73,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 1 — Scaffold aplikasi Next.js
 
-- [ ] Buat Next.js App Router dengan TypeScript dan Tailwind.
-- [ ] Tambahkan struktur awal `app`, `components`, dan `lib`.
-- [ ] Tambahkan scripts lint, type-check, test, dan build.
-- [ ] Sediakan `.env.example` tanpa secret.
+- [x] Buat Next.js App Router dengan TypeScript dan Tailwind.
+- [x] Tambahkan struktur awal `app`, `components`, dan `lib`.
+- [x] Tambahkan scripts lint, type-check, test, dan build.
+- [x] Sediakan `.env.example` tanpa secret.
 
 **Acceptance check:** development server berjalan; lint, type-check, dan build lulus.
 
