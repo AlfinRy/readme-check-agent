@@ -113,10 +113,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 4 — GitHub client dan normalisasi error
 
-- [ ] Ambil metadata repository/default branch dan README.
-- [ ] Bedakan error not found/private, rate limit, README tidak ada, dan upstream failure.
-- [ ] Gunakan header GitHub API yang sesuai dan dukung token server-side opsional tanpa mewajibkannya.
-- [ ] Tambahkan test dengan HTTP request yang di-mock.
+- [x] Ambil metadata repository/default branch dan README.
+- [x] Bedakan error not found/private, rate limit, README tidak ada, dan upstream failure.
+- [x] Gunakan header GitHub API yang sesuai dan dukung token server-side opsional tanpa mewajibkannya.
+- [x] Tambahkan test dengan HTTP request yang di-mock.
 
 **Acceptance check:** README repository publik dapat diambil dan seluruh error utama memiliki pesan yang aman untuk UI.
 
