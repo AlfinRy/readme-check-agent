@@ -263,10 +263,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 15 — Siapkan demo dan release candidate
 
-- [ ] Susun script demo maksimal 90 detik: problem → paste URL → findings → AI Gateway.
-- [ ] Pilih repository demo yang hasilnya stabil dan siapkan fallback.
+- [x] Susun script demo maksimal 90 detik: problem → paste URL → findings → AI Gateway.
+- [x] Pilih repository demo yang hasilnya stabil dan siapkan fallback.
 - [ ] Rekam demo atau siapkan hosted demo final.
-- [ ] Buat draft teks submission berisi repo link dan demo link.
+- [x] Buat draft teks submission berisi repo link dan demo link.
 - [ ] Tag release candidate setelah final smoke test.
 
 **Acceptance check:** video/link dapat dibuka publik dan draft submission siap dikirim tanpa perubahan kode.
