@@ -60,7 +60,7 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ## H-5 — Selasa, 1 September 2026 — Fondasi dan Koneksi AI Gateway
 
-**Target harian:** aplikasi dapat berjalan secara lokal dan server berhasil memanggil GLM-5.3 melalui AI Gateway.
+**Target harian:** aplikasi dapat berjalan secara lokal dan server berhasil memanggil MiniMax M3 Free melalui AI Gateway.
 
 ### Quest 0 — Kunci scope dan roadmap
 
@@ -84,10 +84,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 2 — Smoke test Vercel AI Gateway
 
-- [ ] Pasang Vercel AI SDK dan dependency schema yang diperlukan.
-- [ ] Konfigurasikan model `zai/glm-5.3` hanya di server.
-- [ ] Buat endpoint smoke test sementara atau test terisolasi.
-- [ ] Pastikan secret tidak masuk ke client bundle maupun Git.
+- [x] Pasang Vercel AI SDK dan dependency schema yang diperlukan.
+- [x] Konfigurasikan model `minimax/minimax-m3-free` hanya di server dan catat `minimax/minimax-m2.7-free` sebagai fallback untuk endpoint analisis.
+- [x] Buat endpoint smoke test sementara atau test terisolasi.
+- [x] Pastikan secret tidak masuk ke client bundle maupun Git.
 
 **Acceptance check:** satu prompt sederhana berhasil melewati AI Gateway dan mengembalikan respons dari model yang dipilih.
 

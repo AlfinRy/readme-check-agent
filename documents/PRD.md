@@ -47,7 +47,7 @@ This is a hackathon MVP, not a production tool. Optimize for: working demo > fea
 |---|---|---|
 | Framework | Next.js (App Router) | Required ecosystem for Vercel AI Gateway / AI SDK |
 | AI routing | Vercel AI SDK + AI Gateway | `ai` npm package, gateway provider config |
-| Model | **GLM-5.3** via `zai/glm-5.3` | Natively available on AI Gateway (no separate Z.ai API key needed). Strong at agentic/software-engineering tasks, 1M token context — plenty for README + manifest + tree input. |
+| Model | **MiniMax M3 Free** via `minimax/minimax-m3-free` | Available through AI Gateway's free tier with a 1M-token context window. Use `minimax/minimax-m2.7-free` as the fallback model if the primary model is unavailable. |
 | Data source | GitHub REST API (unauthenticated, public repos only) | No GitHub App/OAuth needed for MVP |
 | Hosting | Vercel | Free tier is enough |
 | Styling | Tailwind (minimal) | Function over form |
@@ -148,14 +148,14 @@ Starting system prompt direction:
 
 This conservatism instruction matters for demo quality: a tool that hallucinates fake issues on a clean repo looks worse than one that correctly says "looks fine."
 
-Note for GLM-5.3: it supports selectable reasoning effort. For this task (comparing README claims against file/manifest evidence), a **medium** reasoning effort is a reasonable starting point — low may miss subtler contradictions, max is likely unnecessary latency/cost for a demo. Worth a quick A/B during Day 3 testing.
+Reasoning support for MiniMax M3 Free must be verified through AI Gateway during Day 3 testing. If supported, start with **medium** reasoning effort; otherwise rely on the conservative prompt and bounded evidence rather than provider-specific options.
 
 ---
 
 ## 12. Locked Decisions
 
 - **Framework:** Next.js (App Router) — confirmed, no PHP/Laravel path since Vercel doesn't natively support PHP runtimes
-- **Model:** `zai/glm-5.3` via AI Gateway — native support, no extra provider account needed
+- **Model:** `minimax/minimax-m3-free` via AI Gateway, with `minimax/minimax-m2.7-free` as fallback — both are available through the Gateway free tier
 - **File tree cap:** For repos with a deep/large tree, only send top-level directories + 1 level of subfolders, plus the manifest file (`package.json`/`composer.json`/etc). Hard cap at **~15-20 file paths** sent to the model. If the tree exceeds this, truncate and note in the prompt that the listing is partial — don't silently drop context.
 
 ---
