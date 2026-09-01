@@ -47,7 +47,7 @@ This is a hackathon MVP, not a production tool. Optimize for: working demo > fea
 |---|---|---|
 | Framework | Next.js (App Router) | Required ecosystem for Vercel AI Gateway / AI SDK |
 | AI routing | Vercel AI SDK + AI Gateway | `ai` npm package, gateway provider config |
-| Model | Any via Gateway (start with a fast/cheap model, e.g. a Claude or GPT-class model available on Gateway) | Swappable — Gateway's whole pitch is model flexibility |
+| Model | **GLM-5.3** via `zai/glm-5.3` | Natively available on AI Gateway (no separate Z.ai API key needed). Strong at agentic/software-engineering tasks, 1M token context — plenty for README + manifest + tree input. |
 | Data source | GitHub REST API (unauthenticated, public repos only) | No GitHub App/OAuth needed for MVP |
 | Hosting | Vercel | Free tier is enough |
 | Styling | Tailwind (minimal) | Function over form |
@@ -148,12 +148,15 @@ Starting system prompt direction:
 
 This conservatism instruction matters for demo quality: a tool that hallucinates fake issues on a clean repo looks worse than one that correctly says "looks fine."
 
+Note for GLM-5.3: it supports selectable reasoning effort. For this task (comparing README claims against file/manifest evidence), a **medium** reasoning effort is a reasonable starting point — low may miss subtler contradictions, max is likely unnecessary latency/cost for a demo. Worth a quick A/B during Day 3 testing.
+
 ---
 
-## 12. Open Questions Before Building
+## 12. Locked Decisions
 
-- Which specific model(s) to route through Gateway — worth testing 1-2 for cost/quality tradeoff during Day 1
-- Whether to cap file tree depth/size for very large repos (recommend: yes, cap at top 2 levels + manifest only for MVP)
+- **Framework:** Next.js (App Router) — confirmed, no PHP/Laravel path since Vercel doesn't natively support PHP runtimes
+- **Model:** `zai/glm-5.3` via AI Gateway — native support, no extra provider account needed
+- **File tree cap:** For repos with a deep/large tree, only send top-level directories + 1 level of subfolders, plus the manifest file (`package.json`/`composer.json`/etc). Hard cap at **~15-20 file paths** sent to the model. If the tree exceeds this, truncate and note in the prompt that the listing is partial — don't silently drop context.
 
 ---
 
