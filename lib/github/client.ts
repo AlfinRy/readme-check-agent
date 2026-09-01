@@ -19,12 +19,33 @@ const repositorySchema = z.object({
   }),
 });
 
+const treeSchema = z.object({
+  sha: z.string().min(1),
+  truncated: z.boolean(),
+  tree: z.array(
+    z.object({
+      path: z.string().min(1),
+      type: z.enum(["blob", "tree", "commit"]),
+      sha: z.string().min(1),
+      size: z.number().int().nonnegative().optional(),
+    }),
+  ),
+});
+
 export type RepositoryMetadata = {
   owner: string;
   name: string;
   fullName: string;
   htmlUrl: string;
   defaultBranch: string;
+};
+
+export type GitTreeEntry = z.infer<typeof treeSchema>["tree"][number];
+
+export type GitTree = {
+  sha: string;
+  truncated: boolean;
+  entries: GitTreeEntry[];
 };
 
 export type GitHubClientErrorCode =
@@ -111,13 +132,7 @@ export function createGitHubClient(options: GitHubClientOptions = {}) {
     repository: GitHubRepo,
     ref?: string,
   ): Promise<string> {
-    const params = new URLSearchParams();
-
-    if (ref) {
-      params.set("ref", ref);
-    }
-
-    const query = params.size > 0 ? `?${params.toString()}` : "";
+    const query = createRefQuery(ref);
     const response = await request(
       `/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}/readme${query}`,
       "application/vnd.github.raw+json",
@@ -127,11 +142,60 @@ export function createGitHubClient(options: GitHubClientOptions = {}) {
       throw createResponseError(response, "readme");
     }
 
+    return readTextResponse(response);
+  }
+
+  async function getTree(
+    repository: GitHubRepo,
+    ref: string,
+  ): Promise<GitTree> {
+    const response = await request(
+      `/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}/git/trees/${encodeURIComponent(ref)}?recursive=1`,
+      "application/vnd.github+json",
+    );
+
+    if (!response.ok) {
+      throw createResponseError(response, "tree");
+    }
+
+    let payload: unknown;
+
     try {
-      return await response.text();
+      payload = await response.json();
     } catch (cause) {
       throw invalidResponse(cause);
     }
+
+    const parsed = treeSchema.safeParse(payload);
+
+    if (!parsed.success) {
+      throw invalidResponse(parsed.error);
+    }
+
+    return {
+      sha: parsed.data.sha,
+      truncated: parsed.data.truncated,
+      entries: parsed.data.tree,
+    };
+  }
+
+  async function getFileContent(
+    repository: GitHubRepo,
+    path: string,
+    ref?: string,
+  ): Promise<string> {
+    const encodedPath = path.split("/").map(encodeURIComponent).join("/");
+    const query = createRefQuery(ref);
+    const response = await request(
+      `/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.repo)}/contents/${encodedPath}${query}`,
+      "application/vnd.github.raw+json",
+    );
+
+    if (!response.ok) {
+      throw createResponseError(response, "content");
+    }
+
+    return readTextResponse(response);
   }
 
   async function request(path: string, accept: string) {
@@ -163,12 +227,12 @@ export function createGitHubClient(options: GitHubClientOptions = {}) {
     }
   }
 
-  return { getRepository, getReadme };
+  return { getRepository, getReadme, getTree, getFileContent };
 }
 
 function createResponseError(
   response: Response,
-  resource: "repository" | "readme",
+  resource: "repository" | "readme" | "tree" | "content",
 ) {
   if (isRateLimited(response)) {
     return new GitHubClientError(
@@ -186,9 +250,16 @@ function createResponseError(
       );
     }
 
+    if (resource === "repository") {
+      return new GitHubClientError(
+        "REPOSITORY_NOT_FOUND",
+        "Repository not found. It may be private or unavailable.",
+      );
+    }
+
     return new GitHubClientError(
-      "REPOSITORY_NOT_FOUND",
-      "Repository not found. It may be private or unavailable.",
+      "GITHUB_UNAVAILABLE",
+      "Repository data could not be read from GitHub.",
     );
   }
 
@@ -196,6 +267,23 @@ function createResponseError(
     "GITHUB_UNAVAILABLE",
     "GitHub returned an unexpected response. Try again shortly.",
   );
+}
+
+function createRefQuery(ref?: string) {
+  if (!ref) {
+    return "";
+  }
+
+  const params = new URLSearchParams({ ref });
+  return `?${params.toString()}`;
+}
+
+async function readTextResponse(response: Response) {
+  try {
+    return await response.text();
+  } catch (cause) {
+    throw invalidResponse(cause);
+  }
 }
 
 function isRateLimited(response: Response) {

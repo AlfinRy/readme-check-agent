@@ -81,6 +81,56 @@ describe("createGitHubClient", () => {
     expect(headers.get("accept")).toBe("application/vnd.github.raw+json");
   });
 
+  it("fetches a recursive repository tree", async () => {
+    const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
+      Response.json({
+        sha: "tree-sha",
+        truncated: false,
+        tree: [
+          { path: "src", type: "tree", sha: "src-sha" },
+          { path: "src/index.ts", type: "blob", sha: "file-sha", size: 42 },
+        ],
+      }),
+    );
+    const client = createGitHubClient({ fetchImpl });
+
+    await expect(client.getTree(repository, "feature/docs")).resolves.toEqual({
+      sha: "tree-sha",
+      truncated: false,
+      entries: [
+        { path: "src", type: "tree", sha: "src-sha" },
+        { path: "src/index.ts", type: "blob", sha: "file-sha", size: 42 },
+      ],
+    });
+
+    expect(fetchImpl.mock.calls[0][0]).toBe(
+      "https://api.github.com/repos/vercel/next.js/git/trees/feature%2Fdocs?recursive=1",
+    );
+  });
+
+  it("fetches raw repository file content", async () => {
+    const fetchImpl = vi
+      .fn<typeof fetch>()
+      .mockResolvedValue(new Response("file content"));
+    const client = createGitHubClient({ fetchImpl });
+
+    await expect(
+      client.getFileContent(
+        repository,
+        "docs/Getting Started.md",
+        "feature/docs",
+      ),
+    ).resolves.toBe("file content");
+
+    const [url, init] = fetchImpl.mock.calls[0];
+    expect(url).toBe(
+      "https://api.github.com/repos/vercel/next.js/contents/docs/Getting%20Started.md?ref=feature%2Fdocs",
+    );
+    expect(new Headers(init?.headers).get("accept")).toBe(
+      "application/vnd.github.raw+json",
+    );
+  });
+
   it("rejects private repositories returned through an optional token", async () => {
     const fetchImpl = vi.fn<typeof fetch>().mockResolvedValue(
       Response.json({ ...repositoryPayload, private: true }),

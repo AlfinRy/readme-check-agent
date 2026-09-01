@@ -124,11 +124,11 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 5 — Evidence collector dengan hard cap
 
-- [ ] Ambil recursive tree dari default branch.
-- [ ] Pilih manifest yang relevan, changelog jika tersedia, dan folder/file high-signal.
-- [ ] Batasi tree ke top-level + satu level subfolder dan maksimal 15–20 path.
-- [ ] Tandai `truncated: true` bila context dipotong.
-- [ ] Tambahkan test untuk repo kecil, repo besar, tanpa manifest, dan tree terpotong.
+- [x] Ambil recursive tree dari default branch.
+- [x] Pilih manifest yang relevan, changelog jika tersedia, dan folder/file high-signal.
+- [x] Batasi tree ke top-level + satu level subfolder dan maksimal 15–20 path.
+- [x] Tandai `truncated: true` bila context dipotong.
+- [x] Tambahkan test untuk repo kecil, repo besar, tanpa manifest, dan tree terpotong.
 
 **Acceptance check:** collector menghasilkan payload ringkas dan stabil tanpa mengirim seluruh codebase.
 
