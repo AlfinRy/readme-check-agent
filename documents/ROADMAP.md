@@ -103,9 +103,9 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 3 — Parser dan validator URL repository
 
-- [ ] Terima format `https://github.com/owner/repo` dengan variasi trailing slash dan `.git` yang aman.
-- [ ] Tolak host selain GitHub, path tidak lengkap, dan URL malformed.
-- [ ] Tambahkan unit test untuk kasus valid dan invalid.
+- [x] Terima format `https://github.com/owner/repo` dengan variasi trailing slash dan `.git` yang aman.
+- [x] Tolak host selain GitHub, path tidak lengkap, dan URL malformed.
+- [x] Tambahkan unit test untuk kasus valid dan invalid.
 
 **Acceptance check:** parser selalu menghasilkan `{ owner, repo }` yang bersih atau typed validation error.
 
