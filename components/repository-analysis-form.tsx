@@ -186,7 +186,7 @@ export function RepositoryAnalysisForm({
               setFieldError(null);
             }}
             disabled={isPending}
-            className="text-accent focus-visible:ring-accent/25 rounded-sm font-medium underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:outline-none disabled:opacity-55"
+            className="text-accent focus-visible:ring-accent/25 inline-flex min-h-11 items-center rounded-sm font-medium underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:outline-none disabled:opacity-55"
           >
             Use example repository
           </button>

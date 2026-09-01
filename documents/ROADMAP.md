@@ -210,10 +210,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 11 — Responsive, accessibility, dan polish
 
-- [ ] Rapikan hierarchy, spacing, contrast, focus state, dan mobile layout.
-- [ ] Pastikan loading diumumkan secara aksesibel dan motion tidak berlebihan.
-- [ ] Cek tidak ada horizontal overflow serta layout stabil saat hasil muncul.
-- [ ] Tambahkan metadata halaman dasar.
+- [x] Rapikan hierarchy, spacing, contrast, focus state, dan mobile layout.
+- [x] Pastikan loading diumumkan secara aksesibel dan motion tidak berlebihan.
+- [x] Cek tidak ada horizontal overflow serta layout stabil saat hasil muncul.
+- [x] Tambahkan metadata halaman dasar.
 
 **Acceptance check:** alur utama nyaman pada mobile/desktop dan tidak memiliki issue accessibility kritis yang terlihat.
 
@@ -334,6 +334,6 @@ git status --short
 | 1 Sep 2026 (H-5) | Fondasi Next.js + AI Gateway bekerja | Selesai |
 | 2 Sep 2026 (H-4) | Evidence GitHub terambil dan dibatasi | Selesai |
 | 3 Sep 2026 (H-3) | Agent endpoint bekerja end-to-end | Sedang berjalan |
-| 4 Sep 2026 (H-2) | UI lengkap dan feature freeze | Belum dimulai |
+| 4 Sep 2026 (H-2) | UI lengkap dan feature freeze | Selesai |
 | 5 Sep 2026 (H-1) | Production + dokumentasi + demo siap | Belum dimulai |
 | 6 Sep 2026 (H) | Final check dan submission sebelum 14.00 WIB | Belum dimulai |

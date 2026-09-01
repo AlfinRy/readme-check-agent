@@ -1,13 +1,21 @@
+import Link from "next/link";
+
 import { AnalysisWorkspace } from "@/components/analysis-workspace";
 
 export default function Home() {
   return (
     <div className="bg-canvas text-ink flex min-h-screen flex-col">
+      <a
+        href="#main-content"
+        className="bg-ink text-canvas focus:ring-primary sr-only z-50 rounded-md px-4 py-2 text-sm font-semibold focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:ring-3 focus:outline-none"
+      >
+        Skip to repository audit
+      </a>
       <header className="border-border border-b">
         <div className="mx-auto flex h-14 w-full max-w-5xl items-center justify-between px-5 sm:px-8">
-          <a
-            href="#main-content"
-            className="focus-visible:ring-primary/30 inline-flex items-center gap-2.5 rounded-sm focus-visible:ring-3 focus-visible:outline-none"
+          <Link
+            href="/"
+            className="focus-visible:ring-primary/30 inline-flex min-h-11 items-center gap-2.5 rounded-sm focus-visible:ring-3 focus-visible:outline-none"
           >
             <span
               className="bg-primary grid size-5 place-items-center rounded-[0.3rem] text-[0.625rem] font-bold text-white"
@@ -18,7 +26,7 @@ export default function Home() {
             <span className="font-mono text-sm font-semibold tracking-[-0.02em]">
               readme<span className="text-muted">/</span>check
             </span>
-          </a>
+          </Link>
           <div className="text-muted flex items-center gap-2 text-xs">
             <span className="hidden sm:inline">Powered by</span>
             <span className="text-ink font-medium">Vercel AI Gateway</span>
@@ -67,7 +75,7 @@ export default function Home() {
             href="https://github.com/AlfinRy/readme-check-agent"
             target="_blank"
             rel="noreferrer"
-            className="text-ink focus-visible:ring-primary/30 w-fit rounded-sm font-medium underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:outline-none"
+            className="text-ink focus-visible:ring-primary/30 inline-flex min-h-11 w-fit items-center rounded-sm font-medium underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:outline-none"
           >
             View source on GitHub
           </a>

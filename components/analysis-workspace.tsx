@@ -15,7 +15,7 @@ export function AnalysisWorkspace() {
         isPending={analysis.isPending}
         onAnalyze={(repoUrl) => analysis.mutate(repoUrl)}
       />
-      <div aria-live="polite">
+      <div>
         {analysis.isPending ? <AnalysisLoading /> : null}
         {analysis.isError ? (
           <AnalysisError
@@ -27,7 +27,7 @@ export function AnalysisWorkspace() {
         ) : null}
         {analysis.isSuccess ? <AnalysisResults result={analysis.data} /> : null}
       </div>
-      <p className="sr-only" role="status">
+      <p className="sr-only" role="status" aria-live="polite">
         {analysis.isPending
           ? "Analyzing repository documentation."
           : analysis.isSuccess

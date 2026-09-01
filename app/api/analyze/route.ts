@@ -1,3 +1,4 @@
+import { RetryError } from "ai";
 import { z } from "zod";
 
 import { auditRepository } from "@/lib/agent/audit";
@@ -157,6 +158,14 @@ function handleAnalyzeError(error: unknown) {
     }
   }
 
+  if (isAiRateLimited(error)) {
+    return errorResponse(
+      "AI_RATE_LIMITED",
+      "The AI auditor is temporarily rate-limited. Wait a moment and try again.",
+      429,
+    );
+  }
+
   console.error("Repository analysis failed", {
     name: error instanceof Error ? error.name : "UnknownError",
   });
@@ -165,6 +174,17 @@ function handleAnalyzeError(error: unknown) {
     "ANALYSIS_FAILED",
     "The repository could not be analyzed. Try again shortly.",
     502,
+  );
+}
+
+function isAiRateLimited(error: unknown) {
+  const candidate = RetryError.isInstance(error) ? error.lastError : error;
+
+  return (
+    typeof candidate === "object" &&
+    candidate !== null &&
+    (("name" in candidate && candidate.name === "GatewayRateLimitError") ||
+      ("statusCode" in candidate && candidate.statusCode === 429))
   );
 }
 

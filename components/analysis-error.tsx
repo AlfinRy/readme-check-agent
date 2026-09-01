@@ -10,6 +10,7 @@ const errorTitles: Record<string, string> = {
   PRIVATE_REPOSITORY: "Private repository not supported",
   README_NOT_FOUND: "README not found",
   GITHUB_RATE_LIMITED: "GitHub rate limit reached",
+  AI_RATE_LIMITED: "AI auditor is busy",
   GITHUB_UNAVAILABLE: "GitHub is unavailable",
   NETWORK_ERROR: "Connection interrupted",
   ANALYSIS_FAILED: "Analysis could not finish",
@@ -71,7 +72,7 @@ export function AnalysisError({ error, onRetry }: AnalysisErrorProps) {
         <button
           type="button"
           onClick={onRetry}
-          className="border-border-strong bg-canvas text-ink hover:border-ink focus-visible:ring-primary/30 inline-flex h-9 shrink-0 items-center justify-center gap-2 rounded-md border px-3.5 text-sm font-semibold transition-colors focus-visible:ring-3 focus-visible:outline-none"
+          className="border-border-strong bg-canvas text-ink hover:border-ink focus-visible:ring-primary/30 inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-md border px-3.5 text-sm font-semibold transition-colors focus-visible:ring-3 focus-visible:outline-none"
         >
           <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" className="size-3.5">
             <path

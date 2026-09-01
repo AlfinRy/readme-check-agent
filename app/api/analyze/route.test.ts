@@ -174,6 +174,26 @@ describe("POST /api/analyze", () => {
     expect((await response.json()).error.code).toBe("GITHUB_UNAVAILABLE");
   });
 
+  it("maps AI Gateway rate limits to a recoverable response", async () => {
+    mocks.auditRepository.mockRejectedValue({
+      name: "GatewayRateLimitError",
+      statusCode: 429,
+    });
+
+    const response = await POST(
+      jsonRequest({ repoUrl: "https://github.com/owner/repo" }),
+    );
+
+    expect(response.status).toBe(429);
+    await expect(response.json()).resolves.toEqual({
+      error: {
+        code: "AI_RATE_LIMITED",
+        message:
+          "The AI auditor is temporarily rate-limited. Wait a moment and try again.",
+      },
+    });
+  });
+
   it("does not expose internal model failures", async () => {
     vi.spyOn(console, "error").mockImplementation(() => undefined);
     mocks.auditRepository.mockRejectedValue(

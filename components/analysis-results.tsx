@@ -32,7 +32,7 @@ export function AnalysisResults({ result }: { result: AnalyzeSuccessResponse }) 
               href={result.repository.htmlUrl}
               target="_blank"
               rel="noreferrer"
-              className="text-accent focus-visible:ring-accent/25 mt-2 inline-flex max-w-full items-center gap-1.5 rounded-sm font-mono text-xs font-medium underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:outline-none"
+              className="text-accent focus-visible:ring-accent/25 mt-1 inline-flex min-h-11 max-w-full items-center gap-1.5 rounded-sm font-mono text-xs font-medium underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:outline-none"
             >
               <span className="truncate">{result.repository.fullName}</span>
               <svg aria-hidden="true" viewBox="0 0 14 14" fill="none" className="size-3 shrink-0">

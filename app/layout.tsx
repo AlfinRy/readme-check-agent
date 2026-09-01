@@ -15,8 +15,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ReadmeCheck Agent",
-  description: "Audit a GitHub README against its repository evidence.",
+  title: "ReadmeCheck Agent | Audit GitHub documentation",
+  description:
+    "Compare a public GitHub README with repository evidence and identify likely outdated sections.",
+  applicationName: "ReadmeCheck Agent",
+  keywords: ["GitHub", "README", "documentation audit", "AI Gateway"],
+  openGraph: {
+    title: "ReadmeCheck Agent",
+    description:
+      "Check README claims against manifests, changelogs, and repository paths.",
+    type: "website",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({

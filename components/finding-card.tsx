@@ -26,7 +26,7 @@ export function FindingCard({ finding }: { finding: Finding }) {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <p className="text-muted font-mono text-[0.6875rem]">README section</p>
-          <h4 className="text-ink mt-1 text-base font-semibold text-pretty">
+          <h4 className="text-ink mt-1 break-words text-base font-semibold text-pretty">
             {finding.section}
           </h4>
         </div>
@@ -40,7 +40,7 @@ export function FindingCard({ finding }: { finding: Finding }) {
 
       <div className="mt-5">
         <p className="text-muted text-xs font-medium">Issue</p>
-        <p className="text-ink mt-1.5 text-sm leading-6 text-pretty">
+        <p className="text-ink mt-1.5 break-words text-sm leading-6 text-pretty">
           {finding.issue}
         </p>
       </div>
@@ -63,7 +63,7 @@ export function FindingCard({ finding }: { finding: Finding }) {
           </svg>
           Repository evidence
         </p>
-        <p className="text-ink mt-2 text-sm leading-6 text-pretty">
+        <p className="text-ink mt-2 break-words text-sm leading-6 text-pretty">
           {finding.evidence}
         </p>
       </div>
