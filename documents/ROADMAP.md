@@ -199,10 +199,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 10 — Findings dan semua UI state
 
-- [ ] Tampilkan finding cards yang dikelompokkan berdasarkan high, medium, lalu low confidence.
-- [ ] Tampilkan section, issue, evidence, dan confidence badge.
-- [ ] Tambahkan loading, empty, repo error, rate-limit error, dan generic error state.
-- [ ] Tambahkan aksi retry tanpa kehilangan URL input.
+- [x] Tampilkan finding cards yang dikelompokkan berdasarkan high, medium, lalu low confidence.
+- [x] Tampilkan section, issue, evidence, dan confidence badge.
+- [x] Tambahkan loading, empty, repo error, rate-limit error, dan generic error state.
+- [x] Tambahkan aksi retry tanpa kehilangan URL input.
 
 **Acceptance check:** setiap response state dapat ditampilkan tanpa crash dan urutan confidence konsisten.
 
