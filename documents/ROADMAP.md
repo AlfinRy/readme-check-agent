@@ -239,10 +239,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 13 — Deploy production ke Vercel
 
-- [ ] Hubungkan public repository ke Vercel.
-- [ ] Konfigurasikan environment variable AI Gateway dan optional GitHub token.
-- [ ] Deploy production dan lakukan smoke test dari perangkat/browser berbeda.
-- [ ] Verifikasi model call benar-benar melalui AI Gateway.
+- [x] Hubungkan public repository ke Vercel.
+- [x] Konfigurasikan environment variable AI Gateway dan optional GitHub token.
+- [x] Deploy production dan lakukan smoke test dari perangkat/browser berbeda.
+- [x] Verifikasi model call benar-benar melalui AI Gateway.
 
 **Acceptance check:** URL production dapat menyelesaikan minimal satu analisis repository publik.
 
