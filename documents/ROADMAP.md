@@ -252,10 +252,10 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 14 — README proyek dan dokumentasi publik
 
-- [ ] Jelaskan masalah, solusi, arsitektur singkat, tech stack, local setup, environment variables, limitations, dan penggunaan AI Gateway.
+- [x] Jelaskan masalah, solusi, arsitektur singkat, tech stack, local setup, environment variables, limitations, dan penggunaan AI Gateway.
 - [ ] Tambahkan screenshot atau GIF jika sudah tersedia.
-- [ ] Cantumkan URL demo production.
-- [ ] Pastikan tidak ada secret atau klaim yang belum benar.
+- [x] Cantumkan URL demo production.
+- [x] Pastikan tidak ada secret atau klaim yang belum benar.
 
 **Acceptance check:** orang lain dapat memahami dan menjalankan proyek hanya dari README.
 
