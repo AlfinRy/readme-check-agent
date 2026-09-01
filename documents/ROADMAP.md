@@ -144,11 +144,11 @@ Jenis commit utama: `docs`, `chore`, `feat`, `test`, `fix`, dan `refactor`.
 
 ### Quest 6 — Schema dan prompt documentation auditor
 
-- [ ] Definisikan schema finding: `section`, `issue`, `evidence`, dan `confidence`.
-- [ ] Definisikan response berisi `findings` dan pesan ringkas.
-- [ ] Susun system prompt agar hanya menandai kontradiksi yang didukung evidence.
-- [ ] Jelaskan kepada model jika tree terpotong.
-- [ ] Lindungi prompt dari instruksi yang tertanam di README.
+- [x] Definisikan schema finding: `section`, `issue`, `evidence`, dan `confidence`.
+- [x] Definisikan response berisi `findings` dan pesan ringkas.
+- [x] Susun system prompt agar hanya menandai kontradiksi yang didukung evidence.
+- [x] Jelaskan kepada model jika tree terpotong.
+- [x] Lindungi prompt dari instruksi yang tertanam di README.
 
 **Acceptance check:** schema menolak output tidak valid dan prompt tidak memaksa temuan palsu.
 
